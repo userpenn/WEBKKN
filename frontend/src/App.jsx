@@ -1,35 +1,38 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from "./pages/Home";
+import Peta from "./pages/Peta";
+import Kegiatan from "./pages/Kegiatan/Kegiatan";
+import Posyandu from "./pages/Kegiatan/Posyandu";
+import Karawitan from "./pages/Kegiatan/Karawitan";
+import KWT from "./pages/Kegiatan/KWT";
+import KarangTaruna from "./pages/Kegiatan/KarangTaruna";
+import Profil from "./pages/Profil"; // Import halaman Profil yang baru
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <Router>
+      <Routes>
+        {/* 1. Halaman Beranda (Menampilkan Berita & Artikel) */}
+        <Route path="/" element={<Home />} />
+        
+        {/* 2. Halaman Peta Dusun (Menampilkan peta.png & Daftar RT) */}
+        <Route path="/peta" element={<Peta />} />
+
+        {/* 3. Halaman Kegiatan (Menampilkan kegiatan1.png sampai kegiatan5.png) */}
+        <Route path="/kegiatan" element={<Kegiatan />} />
+
+        {/* Kegiatan detail */}
+        <Route path="/kegiatan/posyandu" element={<Posyandu />} />
+        <Route path="/kegiatan/karawitan" element={<Karawitan />} />
+        <Route path="/kegiatan/kwt" element={<KWT />} />
+        <Route path="/kegiatan/karang-taruna" element={<KarangTaruna />} />
+
+        {/* 4. Halaman Profil (Menampilkan Sejarah & Perangkat Dusun) */}
+        <Route path="/profil" element={<Profil />} />
+      </Routes>
+    </Router>
+  );
 }
 
-export default App
+export default App;
