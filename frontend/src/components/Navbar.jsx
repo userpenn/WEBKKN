@@ -1,7 +1,18 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 
 function Navbar() {
   const [open, setOpen] = useState(false)
+  const [kategori, setKategori] = useState([])
+
+  useEffect(() => {
+    fetch("http://127.0.0.1:8000/api/kategori-kegiatan")
+      .then((res) => res.json())
+      .then((data) => setKategori(data.data))
+      .catch((err) => console.error(err))
+  }, [])
+
+  // const slugify = (text) =>
+  //   text.toLowerCase().replace(/\s+/g, "-")
 
   return (
     <nav className="fixed top-0 left-0 w-full bg-green-600 shadow-md z-50">
@@ -23,24 +34,41 @@ function Navbar() {
 
           {/* Menu Desktop */}
           <ul className="hidden md:flex items-center gap-8 text-white font-medium">
-            <li><a href="/" className="hover:text-green-200">Beranda</a></li>
-            <li><a href="/peta" className="hover:text-green-200">Peta Dusun</a></li>
+            <li>
+              <a href="/" className="hover:text-green-200">Beranda</a>
+            </li>
 
-            {/* Dropdown */}
+            <li>
+              <a href="/peta" className="hover:text-green-200">Peta Dusun</a>
+            </li>
+
+            {/* Dropdown Kegiatan */}
             <li className="relative group">
-              <span className="cursor-pointer hover:text-green-200">
+              <span className="cursor-pointer hover:text-green-200 inline-block">
                 Kegiatan
               </span>
-              <ul className="absolute left-0 mt-2 w-48 bg-white text-green-700 rounded-md shadow-lg
-                             opacity-0 invisible group-hover:opacity-100 group-hover:visible transition">
-                <li><a href="/kegiatan/posyandu" className="block px-4 py-2 hover:bg-green-100">Posyandu</a></li>
-                <li><a href="/kegiatan/karawitan" className="block px-4 py-2 hover:bg-green-100">Karawitan</a></li>
-                <li><a href="/kegiatan/kwt" className="block px-4 py-2 hover:bg-green-100">KWT</a></li>
-                <li><a href="/kegiatan/karang-taruna" className="block px-4 py-2 hover:bg-green-100">Karang Taruna</a></li>
+
+              <ul
+                className="absolute left-0 top-full w-48 bg-white text-green-700 rounded-md shadow-lg
+                           opacity-0 invisible group-hover:opacity-100 group-hover:visible
+                           transition-opacity duration-200"
+              >
+                {kategori.map((item) => (
+                  <li key={item.id}>
+                    <a
+                      href={`/kegiatan/kegiatan/${item.id}`}
+                      className="block px-4 py-2 hover:bg-green-100"
+                    >
+                      {item.nama}
+                    </a>
+                  </li>
+                ))}
               </ul>
             </li>
 
-            <li><a href="/profil" className="hover:text-green-200">Profil Dusun</a></li>
+            <li>
+              <a href="/profil" className="hover:text-green-200">Profil Dusun</a>
+            </li>
           </ul>
 
           {/* Burger Button */}
@@ -48,8 +76,13 @@ function Navbar() {
             onClick={() => setOpen(!open)}
             className="md:hidden text-white focus:outline-none"
           >
-            <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth="2"
-              viewBox="0 0 24 24">
+            <svg
+              className="w-7 h-7"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              viewBox="0 0 24 24"
+            >
               {open ? (
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
               ) : (
@@ -68,10 +101,15 @@ function Navbar() {
             <div>
               <span className="block font-semibold mb-1">Kegiatan</span>
               <div className="ml-4 space-y-1 text-sm">
-                <a href="/kegiatan/posyandu" className="block">Posyandu</a>
-                <a href="/kegiatan/karawitan" className="block">Karawitan</a>
-                <a href="/kegiatan/kwt" className="block">KWT</a>
-                <a href="/kegiatan/karang-taruna" className="block">Karang Taruna</a>
+                {kategori.map((item) => (
+                  <a
+                    key={item.id}
+                    href={`/kegiatan/kegiatan/${item.id}`}
+                    className="block"
+                  >
+                    {item.nama}
+                  </a>
+                ))}
               </div>
             </div>
 

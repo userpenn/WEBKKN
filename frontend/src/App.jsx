@@ -1,35 +1,38 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
 import Home from "./pages/Home";
 import Peta from "./pages/Peta";
-import Kegiatan from "./pages/Kegiatan/Kegiatan";
-import Posyandu from "./pages/Kegiatan/Posyandu";
-import Karawitan from "./pages/Kegiatan/Karawitan";
-import KWT from "./pages/Kegiatan/KWT";
-import KarangTaruna from "./pages/Kegiatan/KarangTaruna";
-import Profil from "./pages/Profil"; // Import halaman Profil yang baru
+import Profil from "./pages/Profil";
+
+import KegiatanKategori from "./pages/KegiatanByKategori";
+import DetailKegiatan from "./pages/DetailKegiatan";
+import DetailBerita from "./pages/DetailBerita";
+
 import "./App.css";
 
 function App() {
   return (
     <Router>
       <Routes>
-        {/* 1. Halaman Beranda (Menampilkan Berita & Artikel) */}
+        {/* Home */}
         <Route path="/" element={<Home />} />
-        
-        {/* 2. Halaman Peta Dusun (Menampilkan peta.png & Daftar RT) */}
+
+        {/* Peta */}
         <Route path="/peta" element={<Peta />} />
 
-        {/* 3. Halaman Kegiatan (Menampilkan kegiatan1.png sampai kegiatan5.png) */}
-        <Route path="/kegiatan" element={<Kegiatan />} />
-
-        {/* Kegiatan detail */}
-        <Route path="/kegiatan/posyandu" element={<Posyandu />} />
-        <Route path="/kegiatan/karawitan" element={<Karawitan />} />
-        <Route path="/kegiatan/kwt" element={<KWT />} />
-        <Route path="/kegiatan/karang-taruna" element={<KarangTaruna />} />
-
-        {/* 4. Halaman Profil (Menampilkan Sejarah & Perangkat Dusun) */}
+        {/* Profil */}
         <Route path="/profil" element={<Profil />} />
+
+        {/* Kegiatan (DINAMIS) */}
+        <Route path="/kegiatan/kegiatan/:id" element={<KegiatanKategori />} />
+        <Route path="/kegiatan/:id" element={<DetailKegiatan />} />
+        <Route path="/kegiatan/detail/:id" element={<DetailKegiatan />} />
+
+        {/* Berita */}
+        <Route path="/berita/:id" element={<DetailBerita />} />
+
+
+
       </Routes>
     </Router>
   );

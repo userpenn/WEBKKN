@@ -2,19 +2,36 @@ import Navbar from "../components/Navbar"
 import Hero from "../components/Hero"
 import NewsCard from "../components/NewsCard"
 import Footer from "../components/Footer"
+import { useEffect, useState } from "react"
+
 
 function Home() {
-  const beritaTerkini = [
-    { id: 1, img: "/berita1.png", title: "Berita Terkini 1", color: "black" },
-    { id: 2, img: "/berita2.png", title: "Berita Terkini 2", color: "black" },
-    { id: 3, img: "/berita3.png", title: "Berita Terkini 3", color: "black" },
-  ]
+  // const beritaTerkini = [
+  //   { id: 1, img: "/berita1.png", title: "Berita Terkini 1", color: "black" },
+  //   { id: 2, img: "/berita2.png", title: "Berita Terkini 2", color: "black" },
+  //   { id: 3, img: "/berita3.png", title: "Berita Terkini 3", color: "black" },
+  // ]
 
-  const artikelTerkait = [
-    { id: 1, img: "/artikel1.png", title: "Artikel Terkait 1", color: "blue" },
-    { id: 2, img: "/artikel2.png", title: "Artikel Terkait 2", color: "blue" },
-    { id: 3, img: "/artikel3.png", title: "Artikel Terkait 3", color: "blue" },
-  ]
+  // const artikelTerkait = [
+  //   { id: 1, img: "/artikel1.png", title: "Artikel Terkait 1", color: "blue" },
+  //   { id: 2, img: "/artikel2.png", title: "Artikel Terkait 2", color: "blue" },
+  //   { id: 3, img: "/artikel3.png", title: "Artikel Terkait 3", color: "blue" },
+  // ]
+
+  const [beritaTerkini, setBeritaTerkini] = useState([])
+  const [kegiatan, setKegiatan] = useState([])
+
+  useEffect(() => {
+    fetch("http://127.0.0.1:8000/api/berita")
+      .then(res => res.json())
+      .then(data => setBeritaTerkini(data))
+      .catch(err => console.error(err))
+
+    fetch("http://127.0.0.1:8000/api/kegiatan")
+      .then(res => res.json())
+      .then(data => setKegiatan(data))
+      .catch(err => console.error(err))
+  }, [])
 
   return (
     <>
@@ -44,8 +61,10 @@ function Home() {
               {beritaTerkini.map((item) => (
                 <NewsCard
                   key={item.id}
-                  image={item.img}
-                  textColor={item.color}
+                  image={`http://127.0.0.1:8000/storage/${item.thumbnail}`}
+                  title={item.judul}
+                  textColor="black"
+                  link={`/berita/${item.id}`}
                 />
               ))}
             </div>
@@ -54,15 +73,17 @@ function Home() {
           {/* Artikel Terkait */}
           <section className="mb-16">
             <h2 className="text-lg sm:text-xl font-semibold mb-6 text-blue-600">
-              Artikel Terkait
+              Kegiatan Warga Dusun
             </h2>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-              {artikelTerkait.map((item) => (
+              {kegiatan.map((item) => (
                 <NewsCard
                   key={item.id}
-                  image={item.img}
-                  textColor={item.color}
+                  image={`http://127.0.0.1:8000/storage/${item.foto}`}
+                  title={item.judul}
+                  textColor="blue"
+                  link={`/kegiatan/detail/${item.id}`}
                 />
               ))}
             </div>
