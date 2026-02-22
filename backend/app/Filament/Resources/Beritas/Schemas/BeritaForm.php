@@ -28,6 +28,7 @@ class BeritaForm
 
                 FileUpload::make('thumbnail')
                     ->image()
+                    ->disk('public')
                     ->directory('berita')
                     ->required(),
 

@@ -10,6 +10,6 @@ class ProfilDusunController extends Controller
 {
     public function index()
     {
-        return ProfilDusun::first();
+        return ProfilDusun::with('fotoDusuns')->first();
     }
 }

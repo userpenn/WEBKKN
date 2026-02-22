@@ -8,54 +8,44 @@ function Peta() {
     <>
       <Navbar />
 
-      {/* Wrapper utama */}
-      <main className="pt-20">
-        <div className="max-w-7xl mx-auto px-4 pb-16">
+      <main className="pt-20 bg-gray-50 min-h-screen">
+        <div className="max-w-7xl mx-auto px-4">
 
-          {/* Judul Halaman */}
-          <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-10 text-center">
-            Peta Dusun Sendowo Lor
-          </h1>
+          {/* 🔥 Hero Section */}
+          <div className="mb-12">
+            <h1 className="text-3xl md:text-4xl font-semibold text-gray-900">
+              Peta Dusun Sendowo Lor
+            </h1>
+            <p className="text-gray-600 mt-3 max-w-2xl">
+              Lokasi administratif Dusun Sendowo Lor, Kedung Keris,
+              Kecamatan Nglipar, Kabupaten Gunungkidul.
+            </p>
+            <div className="mt-6 h-[2px] w-16 bg-gray-900"></div>
+          </div>
 
-          {/* Section Peta */}
-          <section className="mb-14 text-center">
-            <div className="rounded-xl overflow-hidden shadow-md">
-              <img
-                src="/peta.png"
-                alt="Peta Dusun Sendowo Lor"
-                className="w-full h-56 sm:h-72 md:h-96 object-cover"
-              />
+          {/* 🔥 Section Peta */}
+          <section className="mb-20">
+            <div className="rounded-xl overflow-hidden border">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7904.247826298751!2d110.59327323751015!3d-7.882101891043719!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a4c140285a559%3A0x75eccb044e6c9b43!2sSendowo%20Lor%2C%20Kedung%20Keris%2C%20Kec.%20Nglipar%2C%20Kabupaten%20Gunungkidul%2C%20Daerah%20Istimewa%20Yogyakarta!5e0!3m2!1sid!2sid!4v1771801618601!5m2!1sid!2sid"
+                className="w-full h-[300px] sm:h-[400px] md:h-[500px]"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Peta Dusun Sendowo Lor"
+              ></iframe>
             </div>
 
             <div className="mt-4">
               <a
-                href="https://maps.google.com"
+                href="https://www.google.com/maps/place/Sendowo+Lor,+Kedung+Keris,+Nglipar,+Gunungkidul"
                 target="_blank"
                 rel="noreferrer"
-                className="inline-block text-blue-600 font-semibold hover:underline"
+                className="text-green-600 font-medium hover:underline"
               >
                 Buka di Google Maps
               </a>
-            </div>
-          </section>
-
-          {/* Section Daftar Wilayah RT */}
-          <section>
-            <h2 className="text-lg sm:text-2xl font-semibold text-gray-800 mb-6">
-              Batas Garis Wilayah RT
-            </h2>
-
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
-              {wilayahRT.map((num) => (
-                <a
-                  key={num}
-                  href="#"
-                  className="flex items-center justify-center rounded-lg border border-gray-300 py-3 text-gray-700 
-                             hover:bg-green-100 hover:border-green-400 transition text-sm sm:text-base"
-                >
-                  Wilayah RT {num}
-                </a>
-              ))}
             </div>
           </section>
 

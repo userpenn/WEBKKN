@@ -40,7 +40,7 @@ class ProfilDusunResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\FotoDusunsRelationManager::class,
         ];
     }
 
@@ -52,4 +52,6 @@ class ProfilDusunResource extends Resource
             'edit' => EditProfilDusun::route('/{record}/edit'),
         ];
     }
+
+
 }

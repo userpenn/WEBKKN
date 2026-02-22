@@ -16,7 +16,7 @@ class BeritasTable
         return $table
             ->columns([
                 ImageColumn::make('thumbnail')
-                    ->label('Thumbnail')
+                    ->getStateUsing(fn ($record) => asset('storage/' . $record->thumbnail))
                     ->square(),
 
                 TextColumn::make('judul')
